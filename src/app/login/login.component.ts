@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../core/service/authentication.service';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   loginForm: FormGroup;
   isLoading = false;
   loginError = false;
   isValidUsername = true;
   isValidPassword = true;
+  subscription: Subscription;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -23,6 +25,10 @@ export class LoginComponent {
     private router: Router
   ) {
     this.createForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private createForm() {
@@ -42,7 +48,7 @@ export class LoginComponent {
 
     if (!this.isLoading) {
       this.isLoading = true;
-      this.authenticationService
+      this.subscription = this.authenticationService
         .login(this.loginForm.value)
         .pipe(
           finalize(() => {

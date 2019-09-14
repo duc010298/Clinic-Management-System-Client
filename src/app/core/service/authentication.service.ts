@@ -20,7 +20,7 @@ export interface LoginContext {
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private loginUrl = environment.apiUrl + 'login';
+  private loginUrl = environment.apiUrl + '/login';
 
   constructor(
     private credentialsService: CredentialsService,
