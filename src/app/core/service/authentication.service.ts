@@ -41,6 +41,7 @@ export class AuthenticationService {
       .pipe(map((data: any) => {
         const user = {
           username: context.username,
+          fullname: data.fullName,
           token: data.token
         };
         // login successful if there's a jwt token in the response
