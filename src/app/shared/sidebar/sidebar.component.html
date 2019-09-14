@@ -1,0 +1,7 @@
+<div class="sidebar">
+    <ul class="sidebar-nav">
+        <li *ngFor="let report of reportForms">
+            <a [routerLink]="['/reportForm', report.id]">{{report.reportName}}</a>
+        </li>
+    </ul>
+</div>
