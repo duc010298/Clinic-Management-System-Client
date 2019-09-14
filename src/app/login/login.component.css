@@ -21,7 +21,15 @@
     width: 100%;
 }
 
-.login-container .noti {
+.notify {
     text-align: center;
     color: red;
+}
+
+.notify-alert {
+    color: red;
+}
+
+.error-input {
+    border-color: red;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../core/service/authentication.service';
 import { finalize } from 'rxjs/operators';
@@ -9,10 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm: FormGroup;
-  showMessageErr = false;
   isLoading = false;
+  loginError = false;
+  isValidUsername = true;
+  isValidPassword = true;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -21,9 +23,6 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.createForm();
-  }
-
-  ngOnInit() {
   }
 
   private createForm() {
@@ -35,6 +34,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.clearError();
+    this.validateInput();
+    if (!this.isValidUsername || !this.isValidPassword) {
+      return;
+    }
+
     if (!this.isLoading) {
       this.isLoading = true;
       this.authenticationService
@@ -46,15 +51,30 @@ export class LoginComponent implements OnInit {
         )
         .subscribe(
           () => {
-            this.showMessageErr = false;
+            this.loginError = false;
             this.route.queryParams.subscribe(params =>
               this.router.navigate([params.redirect || '/'], { replaceUrl: true })
             );
           },
           error => {
-            this.showMessageErr = true;
+            this.loginError = true;
           }
         );
+    }
+  }
+
+  private clearError() {
+    this.loginError = false;
+    this.isValidUsername = true;
+    this.isValidPassword = true;
+  }
+
+  private validateInput() {
+    if (this.loginForm.value.username === '') {
+      this.isValidUsername = false;
+    }
+    if (this.loginForm.value.password === '') {
+      this.isValidPassword = false;
     }
   }
 }

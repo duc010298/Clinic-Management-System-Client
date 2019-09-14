@@ -5,18 +5,25 @@
         <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
             <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>
-                <input class="form-control" id="username" formControlName="username">
+                <input class="form-control" [attr.disabled]="isLoading ? '' : null"
+                    [ngClass]="isValidUsername ? '' : 'error-input'" id="username" formControlName="username">
+                <small class="notify-alert" *ngIf="!isValidUsername"><i class="fas fa-exclamation-circle"></i> Hãy nhập
+                    tên đăng nhập</small>
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu:</label>
-                <input type="password" class="form-control" id="password" formControlName="password">
+                <input type="password" class="form-control" [attr.disabled]="isLoading ? '' : null"
+                    [ngClass]="isValidPassword ? '' : 'error-input'" id="password" formControlName="password">
+                <small class="notify-alert" *ngIf="!isValidPassword"><i class="fas fa-exclamation-circle"></i> Hãy nhập
+                    mật khẩu</small>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" checked formControlName="remember"> Nhớ đăng nhập
                 </label>
             </div>
-            <p class="noti" *ngIf="showMessageErr==true">Đăng nhập không thành công</p>
+            <p class="notify" *ngIf="loginError"><i class="fas fa-exclamation-circle"></i> Đăng nhập không thành công
+            </p>
             <button type="submit" class="btn btn-primary" [disabled]="isLoading">
                 <span *ngIf="isLoading==true" class="spinner-border spinner-border-sm"></span>
                 Đăng nhập
