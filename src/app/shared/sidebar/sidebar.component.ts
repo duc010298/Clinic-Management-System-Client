@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { RestService } from 'src/app/core/service/rest.service';
 import { ReportForm } from 'src/app/models/ReportFormModel';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class SidebarComponent implements OnInit, OnDestroy {
   reportForms: ReportForm[] = new Array();
   subscription: Subscription;
+  @Input() toggle: boolean;
 
   constructor(
     private restService: RestService

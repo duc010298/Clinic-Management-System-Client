@@ -20,11 +20,12 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    margin-top: 25px;
 }
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    line-height: 35px;
 }
 
 .sidebar-nav li a {
@@ -49,4 +50,8 @@
 
 .sidebar-nav li.active a {
     color: #000000;
+}
+
+.toggled {
+    width: 0px;
 }

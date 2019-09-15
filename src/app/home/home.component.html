@@ -1,4 +1,4 @@
 <div class="wrapper">
-    <app-sidebar></app-sidebar>
-    <app-navbar></app-navbar>
+    <app-sidebar [toggle]="toggle"></app-sidebar>
+    <app-navbar (onMenuToggle)="sideBarToggle($event)"></app-navbar>
 </div>

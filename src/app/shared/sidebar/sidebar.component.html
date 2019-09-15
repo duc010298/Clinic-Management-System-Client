@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" [ngClass]="toggle ? 'toggled' : ''">
     <ul class="sidebar-nav">
         <li *ngFor="let report of reportForms">
             <a [routerLink]="['/reportForm', report.id]">{{report.reportName}}</a>
