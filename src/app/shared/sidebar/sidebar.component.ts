@@ -1,7 +1,9 @@
+import { ModalService } from './../../core/service/modal.service';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { RestService } from 'src/app/core/service/rest.service';
 import { ReportForm } from 'src/app/models/ReportFormModel';
 import { Subscription } from 'rxjs';
+import { dialogIdConstant } from '../dialog/dialogIdContant';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +16,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @Input() toggle: boolean;
 
   constructor(
-    private restService: RestService
+    private restService: RestService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +41,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          console.log(error);
+          this.modalService.open(dialogIdConstant.NOTIFY, "Lỗi không tải được dữ liệu, vui lòng tải lại trang", true);
         }
       )
   }

@@ -1,0 +1,11 @@
+.alert {
+    color: #fff;
+}
+
+.alert .modal-body {
+    background-color: #FF323F
+}
+
+.alert .modal-footer {
+    background-color: #FF323F
+}
