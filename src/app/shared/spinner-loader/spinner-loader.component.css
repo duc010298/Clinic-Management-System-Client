@@ -1,0 +1,25 @@
+.background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1055;
+    transition: opacity .15s linear;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+.show {
+    display: block;
+}

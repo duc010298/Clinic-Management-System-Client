@@ -1,9 +1,11 @@
+import { LoaderService } from './../../core/service/loader.service';
 import { ModalService } from './../../core/service/modal.service';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { RestService } from 'src/app/core/service/rest.service';
 import { ReportForm } from 'src/app/models/ReportFormModel';
 import { Subscription } from 'rxjs';
 import { dialogIdConstant } from '../dialog/dialogIdContant';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +19,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private restService: RestService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private loaderService: LoaderService,
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +32,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   getAllReport() {
+    this.loaderService.show();
     this.subscription = this.restService.getAllReport()
+      .pipe(
+        finalize(() => {
+          this.loaderService.hide();
+        })
+      )
       .subscribe(
         (data: any) => {
           for (let report of data) {

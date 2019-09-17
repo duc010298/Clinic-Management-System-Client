@@ -4,6 +4,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotifyDialogComponent } from './dialog/notify-dialog/notify-dialog.component';
+import { SpinnerLoaderComponent } from './spinner-loader/spinner-loader.component';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { NotifyDialogComponent } from './dialog/notify-dialog/notify-dialog.comp
     SidebarComponent,
     NavbarComponent,
     NotifyDialogComponent,
+    SpinnerLoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -18,8 +20,9 @@ import { NotifyDialogComponent } from './dialog/notify-dialog/notify-dialog.comp
   ],
   exports: [
     NotifyDialogComponent,
+    SpinnerLoaderComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
   ]
 })
 export class SharedModule { }
