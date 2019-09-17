@@ -6,6 +6,10 @@ export class ModalService {
 
   add(modal: any) {
     // add modal to array of active modals
+    let temp: any = this.modals.filter(x => x.id === modal.id)[0];
+    if (temp) {
+      console.warn("Duplicate dialog");
+    }
     this.modals.push(modal);
   }
 
